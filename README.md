@@ -28,6 +28,6 @@ java -cp target/classes edu.university.go.client.ClientMain
 * Sequence diagram
 * State diagram
   
-![Package](Package.png)
-![Squence](Sequence.png)
-![State](State.png)
+![Package](uml/Package.png)
+![Squence](uml/Sequence.png)
+![State](uml/State.png)
