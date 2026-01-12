@@ -1,0 +1,56 @@
+package edu.university.go.server;
+
+import edu.university.go.board.Board;
+import edu.university.go.board.Color;
+import edu.university.go.game.Game;
+import edu.university.go.game.Move;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class GameSessionTest {
+
+    @Test
+    void validMoveIsBroadcasted() {
+        Game game = new Game(new Board(9));
+        GameSession session = new GameSession(game);
+
+        FakeClient c1 = new FakeClient();
+        FakeClient c2 = new FakeClient();
+
+        session.addPlayer("p1", c1);
+        session.addPlayer("p2", c2);
+
+        session.handleMove(new Move(Color.BLACK, 4, 4, "p1"));
+
+        assertTrue(c1.lastMessage.contains("MOVE_PLAYED"));
+        assertTrue(c2.lastMessage.contains("MOVE_PLAYED"));
+    }
+
+    @Test
+    void invalidMoveSendsErrorToPlayer() {
+        Game game = new Game(new Board(9));
+        GameSession session = new GameSession(game);
+
+        FakeClient c1 = new FakeClient();
+        session.addPlayer("p1", c1);
+
+        session.handleMove(new Move(Color.BLACK, 4, 4, "p1"));
+
+        assertTrue(c1.lastMessage.startsWith("ERROR"));
+    }
+
+    static class FakeClient extends ClientHandler {
+
+        String lastMessage;
+
+        FakeClient() {
+            super(null, null);
+        }
+
+        @Override
+        void send(String msg) {
+            lastMessage = msg;
+        }
+    }
+}
