@@ -110,4 +110,40 @@ public class Board {
             grid[p.x][p.y] = Color.EMPTY;
         }
     }
+
+    // Create a deep copy of the board
+    public Board clone(){
+        Board copy = new Board(size);
+        for (int i = 0; i < size; i++) {
+            System.arraycopy(grid[i], 0, copy.grid[i], 0, size);
+        }
+        return copy;
+    }
+
+    // Check if two boards are equal (for KO)
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Board)) return false;
+        Board other = (Board) obj;
+        return Arrays.deepEquals(grid, other.grid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(grid);
+    }
+
+    public List<Point> getCapturedStones(Color color, int x, int y) {
+        List<Point> capturedPoints = new ArrayList<>();
+
+        for (Point n : neighbors(new Point(x, y))) {
+            if (get(n.x, n.y) == color.opposite()) {
+                Chain enemy = getChain(n);
+                if (countLiberties(enemy) == 0) {
+                    capturedPoints.addAll(enemy.getStones());
+                }
+            }
+        }
+        return capturedPoints;
+    }
 }
