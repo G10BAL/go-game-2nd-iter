@@ -5,6 +5,20 @@ This is the second iteration of the Go-Game project. In this version, the UI imp
 ## How to Run
 
 Now game works in a hot-spot mode, so we have one board and players on one PC make turns one by one
+```
+mvn javafx:run
+```
+
+## Documentation
+
+Documentation is generated with JavaDoc and can be accessed by ip-adres
+```
+http://localhost:8000
+```
+Or maven
+```
+mvn javadoc:javadoc -q && xdg-open target/reports/apidocs/index.html
+```
 
 ## Design Patterns Used
 
@@ -14,10 +28,11 @@ Now game works in a hot-spot mode, so we have one board and players on one PC ma
 * **Protocol / Command**: Commands are used to standardize communication between the client and server. Each action (e.g., placing a stone, passing a turn) is represented as a command or protocol message, allowing clear separation of game logic and network communication.
 
 ## Some UML-diagrams
-* Package diagram
+* Class diagram
 * Sequence diagram
-* State diagram
+* State diagrams
   
-![Package](uml/Package.png)
+![Class](uml/ClassDiagram.png)
 ![Squence](uml/Sequence.png)
 ![State](uml/State.png)
+![State2](uml/KoRuleState.png)
