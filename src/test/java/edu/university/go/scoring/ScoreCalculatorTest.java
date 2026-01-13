@@ -32,6 +32,25 @@ class ScoreCalculatorTest {
     }
 
     @Test
+    @DisplayName("Chess board")
+    void testOnlyCapturedStonesNoTerritory() {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                Color color = ((i + j) % 2 == 0) ? Color.BLACK : Color.WHITE;
+                board.placeStone(color, i, j);
+            }
+        }
+        
+        int capturedByBlack = 0;
+        int capturedByWhite = 5;
+        
+        GameResult result = calculator.calculateScore(board, capturedByBlack, capturedByWhite);
+        
+        assertEquals(0.0, result.blackScore(), "Black: 0 territory + 0 captured");
+        assertEquals(5.0 + 5.0 + KOMI, result.whiteScore(), "White: 5 territory + 5 captured + komi");
+    }
+
+    @Test
     @DisplayName("Simple black territory without captures")
     void testSimpleBlackTerritoryNoCaptures() {
         /*
