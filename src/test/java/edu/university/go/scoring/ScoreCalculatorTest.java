@@ -81,7 +81,7 @@ class ScoreCalculatorTest {
     }
 
     @Test
-    @DisplayName("Велика територія чорних перемагає komi")
+    @DisplayName("Big black territory beats komi")
     void testLargeBlackTerritoryBeatsKomi() {
         /*
          * Create a large enclosed territory for Black:

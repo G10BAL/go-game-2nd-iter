@@ -135,15 +135,30 @@ public class Board {
 
     public List<Point> getCapturedStones(Color color, int x, int y) {
         List<Point> capturedPoints = new ArrayList<>();
-
+        Set<Point> capturedSet = new HashSet<>();
+        
+        // Check if position is valid first
+        if (!isInside(x, y) || grid[x][y] != Color.EMPTY) {
+            return capturedPoints;
+        }
+        
+        // Temporarily place the stone to check what will be captured
+        grid[x][y] = color;
+        
+        // Check enemy chains
         for (Point n : neighbors(new Point(x, y))) {
             if (get(n.x, n.y) == color.opposite()) {
                 Chain enemy = getChain(n);
                 if (countLiberties(enemy) == 0) {
-                    capturedPoints.addAll(enemy.getStones());
+                    capturedSet.addAll(enemy.getStones());
                 }
             }
         }
+        
+        // Restore the board
+        grid[x][y] = Color.EMPTY;
+        
+        capturedPoints.addAll(capturedSet);
         return capturedPoints;
     }
 }

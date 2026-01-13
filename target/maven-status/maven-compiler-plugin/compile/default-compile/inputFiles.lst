@@ -6,6 +6,7 @@
 /home/gl0bal/softeng/lab5/src/main/java/edu/university/go/client/Client.java
 /home/gl0bal/softeng/lab5/src/main/java/edu/university/go/client/ClientMain.java
 /home/gl0bal/softeng/lab5/src/main/java/edu/university/go/client/ConsoleUI.java
+/home/gl0bal/softeng/lab5/src/main/java/edu/university/go/game/EnhancedGameController.java
 /home/gl0bal/softeng/lab5/src/main/java/edu/university/go/game/Game.java
 /home/gl0bal/softeng/lab5/src/main/java/edu/university/go/game/GameEvent.java
 /home/gl0bal/softeng/lab5/src/main/java/edu/university/go/game/GameObserver.java
@@ -13,6 +14,9 @@
 /home/gl0bal/softeng/lab5/src/main/java/edu/university/go/game/InProgress.java
 /home/gl0bal/softeng/lab5/src/main/java/edu/university/go/game/Move.java
 /home/gl0bal/softeng/lab5/src/main/java/edu/university/go/game/WaitingForPlayers.java
+/home/gl0bal/softeng/lab5/src/main/java/edu/university/go/javafx/GameBoardCanvas.java
+/home/gl0bal/softeng/lab5/src/main/java/edu/university/go/javafx/InfoPanel.java
+/home/gl0bal/softeng/lab5/src/main/java/edu/university/go/javafx/MainApplication.java
 /home/gl0bal/softeng/lab5/src/main/java/edu/university/go/protocol/Command.java
 /home/gl0bal/softeng/lab5/src/main/java/edu/university/go/protocol/CommandType.java
 /home/gl0bal/softeng/lab5/src/main/java/edu/university/go/protocol/Move.java
