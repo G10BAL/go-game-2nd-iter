@@ -5,8 +5,13 @@ This is the second iteration of the Go-Game project. In this version, the UI imp
 ## How to Run
 
 Now game works in a hot-spot mode, so we have one board and players on one PC make turns one by one
+This one will run 19x19 board with Komi = 7.5
 ```
 mvn javafx:run
+```
+Or with optional parameters replace {Size} and {Komi} with actual numbers
+```
+mvn javafx:run -Djavafx.args="--size={Size} --komi={Komi}"
 ```
 
 ## Documentation
