@@ -1,20 +1,10 @@
-# Go-Game - Iteration 1
+# Go-Game - Iteration 2
 
-This is the first iteration of the Go-Game project. In this version, the board size is **hardcoded**.
+This is the second iteration of the Go-Game project. In this version, the UI implemented with JavaFX and board size is a parametr
 
 ## How to Run
 
-### Server
-
-```
-java -cp target/classes edu.university.go.server.ServerMain
-```
-
-### Client
-
-```
-java -cp target/classes edu.university.go.client.ClientMain
-```
+Now game works in a hot-spot mode, so we have one board and players on one PC make turns one by one
 
 ## Design Patterns Used
 
