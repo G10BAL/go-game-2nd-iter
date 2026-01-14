@@ -4,14 +4,28 @@ This is the second iteration of the Go-Game project. In this version, the UI imp
 
 ## How to Run
 
+### Hot Spot
 Now game works in a hot-spot mode, so we have one board and players on one PC make turns one by one
 This one will run 19x19 board with Komi = 7.5
 ```
-mvn javafx:run
+mvn exec:java -Dexec.mainClass="edu.university.go.javafx.MainApplication"
 ```
 Or with optional parameters replace {Size} and {Komi} with actual numbers
 ```
-mvn javafx:run -Djavafx.args="--size={Size} --komi={Komi}"
+mvn exec:java -Dexec.mainClass="edu.university.go.javafx.MainApplication" -Djavafx.args="--size={Size} --komi={Komi}"
+```
+
+### Client-Server
+Also server-client mode
+
+#### Server
+```
+mvn exec:java -Dexec.mainClass="edu.university.go.server.ServerMain" -Dexec.args="{port} {size}"
+```
+
+#### Client
+```
+mvx javafx:run
 ```
 
 ## Documentation
@@ -38,6 +52,7 @@ mvn javadoc:javadoc -q && xdg-open target/reports/apidocs/index.html
 * State diagrams
   
 ![Class](uml/ClassDiagram.png)
+![Class2](uml/ClassDiagram_ClientServer.png)
 ![Squence](uml/Sequence.png)
 ![State](uml/State.png)
 ![State2](uml/KoRuleState.png)
