@@ -34,4 +34,32 @@ public class Client {
     public void close() throws IOException {
         socket.close();
     }
+
+    /**
+     * Check if client is connected.
+     */
+    public boolean isConnected() {
+        return socket != null && socket.isConnected() && !socket.isClosed();
+    }
+
+    /**
+     * Start listening for messages from the server in a background thread.
+     * Calls the provided callback when messages arrive.
+     * 
+     * @param callback Function to call with incoming messages
+     */
+    public void receiveAsync(java.util.function.Consumer<String> callback) {
+        Thread thread = new Thread(() -> {
+            try {
+                String line;
+                while ((line = in.readLine()) != null) {
+                    callback.accept(line);
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading from server: " + e.getMessage());
+            }
+        });
+        thread.setDaemon(true);
+        thread.start();
+    }
 }

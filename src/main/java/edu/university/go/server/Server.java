@@ -10,13 +10,20 @@ public class Server {
 
     private static Server instance;
 
-    private final int port = 9999;
+    private final int port;
+    private final int boardSize;
     private final GameSession session;
 
+    // Singleton constructor
     private Server() {
-        // Board size is hardcoded, I guess
-        // I will change it in 2nd iteration
-        Game game = GameFactory.createGame(19);
+        this(9999, 19);
+    }
+
+    // Constructor with parameters
+    public Server(int port, int boardSize) {
+        this.port = port;
+        this.boardSize = boardSize;
+        Game game = GameFactory.createGame(boardSize);
         session = new GameSession(game);
     }
 

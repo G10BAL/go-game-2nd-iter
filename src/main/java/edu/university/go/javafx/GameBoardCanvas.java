@@ -9,10 +9,10 @@ import edu.university.go.board.Point;
 import edu.university.go.game.EnhancedGameController;
 import edu.university.go.game.GameEvent;
 import edu.university.go.game.GameObserver;
+import java.util.function.BiConsumer;
 
 public class GameBoardCanvas extends Canvas implements GameObserver {
     
-    // Fixed canvas size
     private static final int CANVAS_SIZE = 600;
     private static final int MARGIN = 40;
     
@@ -20,15 +20,17 @@ public class GameBoardCanvas extends Canvas implements GameObserver {
     private final Board board;
     private final double cellSize;
     
+    // Optional callback for network clients to send moves
+    private BiConsumer<Integer, Integer> onMoveClick = null;
+    // Flag to indicate if local move making is enabled
+    private boolean isLocalMode = true;
+    
     public GameBoardCanvas(EnhancedGameController controller) {
         super(CANVAS_SIZE, CANVAS_SIZE);
         
         this.controller = controller;
         this.board = controller.getBoard();
         
-        // Calculate cell size based on board size to fit in canvas
-        // Available space = CANVAS_SIZE - 2 * MARGIN
-        // Cell size = available space / (board size - 1)
         this.cellSize = (CANVAS_SIZE - 2 * MARGIN) / (double) (board.getSize() - 1);
         
         controller.addObserver(this);
@@ -37,11 +39,25 @@ public class GameBoardCanvas extends Canvas implements GameObserver {
         draw();
     }
     
+    /**
+     * Set a callback for move clicks (used for network clients)
+     */
+    public void setOnMoveClick(BiConsumer<Integer, Integer> callback, boolean localMode) {
+        this.onMoveClick = callback;
+        this.isLocalMode = localMode;
+    }
+    
     private void handleClick(MouseEvent event) {
         Point p = pixelToPoint(event.getX(), event.getY());
         if (p != null) {
-            if (controller.makeMove(p.x, p.y)) {
-                draw();
+            if (isLocalMode) {
+                // Local mode: make move directly
+                if (controller.makeMove(p.x, p.y)) {
+                    draw();
+                }
+            } else if (onMoveClick != null) {
+                // Network mode: send move to server
+                onMoveClick.accept(p.x, p.y);
             }
         }
     }
@@ -70,6 +86,13 @@ public class GameBoardCanvas extends Canvas implements GameObserver {
                 }
             }
         }
+    }
+    
+    /**
+     * Public method to trigger a redraw of the canvas
+     */
+    public void redraw() {
+        draw();
     }
     
     private void drawStone(GraphicsContext gc, int x, int y, edu.university.go.board.Color color) {

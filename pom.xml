@@ -44,7 +44,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>edu.university.go.javafx.MainApplication</mainClass>
+                    <mainClass>edu.university.go.javafx.ClientApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

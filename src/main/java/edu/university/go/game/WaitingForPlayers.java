@@ -11,6 +11,8 @@ class WaitingForPlayers implements GameState {
     public void addPlayer(Game game, String playerId) {
         players.add(playerId);
         if (players.size() == 2) {
+            // Reset Ko rule at start
+            game.getKoRule().reset();
             game.setState(new InProgress(players));
             game.notifyObservers(GameEvent.GAME_STARTED);
         }

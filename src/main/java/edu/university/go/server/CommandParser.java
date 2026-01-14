@@ -20,6 +20,8 @@ public class CommandParser {
         CommandType type = switch (keyword) {
             case "JOIN" -> CommandType.JOIN;
             case "MOVE" -> CommandType.MOVE;
+            case "PASS" -> CommandType.PASS;
+            case "RESIGN" -> CommandType.RESIGN;
             case "QUIT" -> CommandType.QUIT;
             default -> CommandType.UNKNOWN;
         };

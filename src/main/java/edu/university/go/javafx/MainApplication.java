@@ -34,7 +34,7 @@ public class MainApplication extends Application {
             try {
                 boardSize = Integer.parseInt(params.get("size"));
                 if (boardSize != 9 && boardSize != 13 && boardSize != 19) {
-                    System.out.println("Invalid board size. Must be between 9 13 or 19. Using default: 19");
+                    System.out.println("Invalid board size. Must be 9 13 or 19. Using default: 19");
                     boardSize = 19;
                 }
             } catch (NumberFormatException e) {

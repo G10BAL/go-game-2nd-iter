@@ -207,13 +207,37 @@ package "edu.university.go.scoring" {
 
 ' JavaFX UI Module
 package "edu.university.go.javafx" {
-    class MainApplication {
+
+    class ClientApplication {
+        Client client
         EnhancedGameController controller
         GameBoardCanvas boardCanvas
-        InfoPanel infoPanel
+        NetworkInfoPanel infoPanel
+        int boardSize
+        Color myColor
         --
         start(Stage): void
-        {static} main(String[]): void
+        sendMoveToServer(int,int): void
+        sendPassToServer(): void
+        sendResignToServer(): void
+    }
+
+    class NetworkInfoPanel {
+        Label connectionStatusLabel
+        Label colorLabel
+        Label currentPlayerLabel
+        Label capturedBlackLabel
+        Label capturedWhiteLabel
+        Button passButton
+        Button resignButton
+        --
+        updateConnectionStatus(String, boolean): void
+        updateConnectedAs(String): void
+        updateColorAssigned(Color): void
+        updateCapturedStones(int,int): void
+        updateCurrentTurn(Color): void
+        enableGameControls(): void
+        disableGameControls(): void
     }
     
     class GameBoardCanvas {
@@ -392,9 +416,7 @@ ScoreCalculator "1" -- "1" TerritoryCounter
 
 TerritoryCounter "1" -- "many" Territory
 
-MainApplication "1" -- "1" EnhancedGameController
-MainApplication "1" -- "1" GameBoardCanvas
-MainApplication "1" -- "1" InfoPanel
+' MainApplication relationships removed
 
 GameBoardCanvas "1" -- "1" EnhancedGameController
 GameBoardCanvas "1" -- "1" Board
@@ -420,5 +442,10 @@ CommandParser -- Command
 GameFactory -- Game
 
 Client -- ConsoleUI
+
+ClientApplication "1" -- "1" Client
+ClientApplication "1" -- "1" NetworkInfoPanel
+ClientApplication "1" -- "1" EnhancedGameController
+NetworkInfoPanel "1" -- "1" ClientApplication
 
 @enduml

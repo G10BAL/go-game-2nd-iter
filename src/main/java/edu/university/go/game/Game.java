@@ -2,6 +2,7 @@ package edu.university.go.game;
 
 import edu.university.go.board.Board;
 import edu.university.go.board.Color;
+import edu.university.go.validators.KoRule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ public class Game {
     private final Board board;
     private GameState state;
     private Color currentTurn = Color.BLACK;
+    private final KoRule koRule = new KoRule();
 
     private final List<GameObserver> observers = new ArrayList<>();
 
@@ -42,6 +44,10 @@ public class Game {
 
     public Board getBoard() {
         return board;
+    }
+
+    public KoRule getKoRule() {
+        return koRule;
     }
 
     /* ===== Observer ===== */

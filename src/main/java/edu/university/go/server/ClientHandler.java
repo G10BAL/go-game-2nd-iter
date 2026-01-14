@@ -41,25 +41,34 @@ class ClientHandler implements Runnable {
     }
 
     public void handleCommand(String line) {
-        // format: MOVE x y COLOR
-        String[] parts = line.split(" ");
-        if (parts.length == 4 && parts[0].equals("MOVE")) {
-            int x = Integer.parseInt(parts[1]);
-            int y = Integer.parseInt(parts[2]);
-            Color color = Color.valueOf(parts[3]);
-
-            session.handleMove(new Move(color, x, y, playerId));
+        String[] parts = line.trim().split("\\s+");
+        String command = parts.length > 0 ? parts[0].toUpperCase() : "";
+        
+        if ("MOVE".equals(command) && parts.length == 4) {
+            // format: MOVE x y COLOR
+            try {
+                int x = Integer.parseInt(parts[1]);
+                int y = Integer.parseInt(parts[2]);
+                Color color = Color.valueOf(parts[3]);
+                session.handleMove(new Move(color, x, y, playerId));
+            } catch (Exception e) {
+                System.err.println("Error parsing MOVE command: " + e.getMessage());
+                session.handleMove(new Move(Color.BLACK, -1, -1, playerId));
+            }
+        } else if ("PASS".equals(command)) {
+            // format: PASS
+            session.handlePass(playerId);
+        } else if ("RESIGN".equals(command)) {
+            // format: RESIGN
+            session.handleResign(playerId);
         } else {
-            // For invalid commands, delegate to the session so it can
-            // decide how to report errors (tests provide fake sessions
-            // that override handleMove to observe invalid input). Use a
-            // sentinel Move tied to this player so session handlers can
-            // respond appropriately.
+            // For invalid commands
             session.handleMove(new Move(Color.BLACK, -1, -1, playerId));
         }
     }
 
     void send(String msg) {
         out.println(msg);
+        out.flush();  // Ensure message is sent immediately
     }
 }

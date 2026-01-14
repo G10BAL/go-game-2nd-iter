@@ -22,6 +22,18 @@ public class Board {
         return grid[x][y];
     }
 
+    /**
+     * Sets the color at the specified position without any validation or capture logic.
+     * This is intended for client-side board synchronization from server state.
+     * @param x The x-coordinate (column)
+     * @param y The y-coordinate (row)
+     * @param color The color to set
+     */
+    public void setColor(int x, int y, Color color) {
+        if (isInside(x, y)) {
+            grid[x][y] = color;
+        }
+    }
     // Check if the given coordinates are inside the board
     public boolean isInside(int x, int y) {
         return x >= 0 && x < size && y >= 0 && y < size;
