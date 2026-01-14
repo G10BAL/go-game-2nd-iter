@@ -51,8 +51,12 @@ public class EnhancedGameController {
         
         Color currentColor = game.getCurrentTurn();
         
+        // Save board state before the move for Ko rule validation
+        Board boardBeforeMove = board.clone();
+        
         // Check for Ko violation
         if (koValidator.isKoViolation(board, x, y, currentColor)) {
+            System.out.println("[Ko Rule] Move (" + x + ", " + y + ") violates Ko rule!");
             notifyObservers(GameEvent.INVALID_MOVE);
             return false;
         }
@@ -82,8 +86,8 @@ public class EnhancedGameController {
                 }
             }
             
-            // Update state for Ko
-            koValidator.updateState(board);
+            // Update state for Ko after move succeeded (pass the board BEFORE the move)
+            koValidator.updateState(boardBeforeMove);
             
             // Reset passes
             consecutivePasses = 0;

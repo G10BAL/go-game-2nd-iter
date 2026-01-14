@@ -1,0 +1,11 @@
+edu/university/go/server/ClientHandlerTest$FakeSession.class
+edu/university/go/server/GameSessionTest.class
+edu/university/go/game/GameObserverTest.class
+edu/university/go/board/BoardTest.class
+edu/university/go/protocol/ServerResponseTest.class
+edu/university/go/game/GameStateTest.class
+edu/university/go/scoring/TerritoryCounterTest.class
+edu/university/go/validators/KoRuleTest.class
+edu/university/go/server/ClientHandlerTest.class
+edu/university/go/server/GameSessionTest$FakeClient.class
+edu/university/go/scoring/ScoreCalculatorTest.class
