@@ -48,8 +48,8 @@ public class KoRule {
      * Update the Ko rule state after a valid move has been made.
      * This should be called BEFORE the next move is attempted.
      * 
-     * We shift the board states: 
-     * - boardBeforePreviousMove <- current board
+    * We shift the board states: 
+    * - boardBeforePreviousMove {@literal <-} current board
      * 
      * @param boardBeforeThisMove The board state BEFORE the move that just happened
      */

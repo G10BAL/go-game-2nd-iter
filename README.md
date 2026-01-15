@@ -30,7 +30,12 @@ mvx javafx:run
 
 ## Documentation
 
-Documentation is generated with JavaDoc and can be accessed by ip-adres
+Documentation is generated with JavaDoc and can be accessed by ip-adress
+Run local server for docs
+```
+python3 -m http.server 8000 --directory target/reports/apidocs
+```
+
 ```
 http://localhost:8000
 ```
