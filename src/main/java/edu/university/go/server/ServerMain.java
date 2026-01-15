@@ -24,8 +24,8 @@ public class ServerMain {
         if (args.length >= 2) {
             try {
                 boardSize = Integer.parseInt(args[1]);
-                if (boardSize < 5 || boardSize > 21) {
-                    System.out.println("Board size must be between 5 and 21");
+                if (boardSize != 9 && boardSize != 13 && boardSize != 19) {
+                    System.out.println("Board size must be 9, 13, or 19");
                     System.exit(1);
                 }
             } catch (NumberFormatException e) {
