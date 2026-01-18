@@ -10,10 +10,6 @@ This one will run 19x19 board with Komi = 7.5
 ```
 mvn exec:java -Dexec.mainClass="edu.university.go.javafx.MainApplication"
 ```
-Or with optional parameters replace {Size} and {Komi} with actual numbers
-```
-mvn exec:java -Dexec.mainClass="edu.university.go.javafx.MainApplication" -Djavafx.args="--size={Size} --komi={Komi}"
-```
 
 ### Client-Server
 Also server-client mode
@@ -25,7 +21,7 @@ mvn exec:java -Dexec.mainClass="edu.university.go.server.ServerMain" -Dexec.args
 
 #### Client
 ```
-mvx javafx:run
+mvn javafx:run
 ```
 
 ## Documentation
