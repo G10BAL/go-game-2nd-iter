@@ -5,7 +5,7 @@ import edu.university.go.game.Game;
 
 public class GameFactory {
 
-    public static Game createGame(int boardSize) {
-        return new Game(new Board(boardSize));
-    }
+  public static Game createGame(int boardSize) {
+    return new Game(new Board(boardSize));
+  }
 }
