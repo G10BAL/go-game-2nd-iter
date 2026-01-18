@@ -72,8 +72,8 @@ class InProgress implements GameState {
 
         // Update Ko rule state after successful move
         game.getKoRule().updateState(boardBefore);
-
-        game.notifyObservers(GameEvent.MOVE_PLAYED);
         game.switchTurn();
+        game.notifyObservers(GameEvent.MOVE_PLAYED);
+        
     }
 }
