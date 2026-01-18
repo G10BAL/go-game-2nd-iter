@@ -3,60 +3,80 @@ package edu.university.go.game;
 import edu.university.go.board.Board;
 import edu.university.go.board.Color;
 import edu.university.go.validators.KoRule;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
 
-    private final Board board;
-    private GameState state;
-    private Color currentTurn = Color.BLACK;
-    private final KoRule koRule = new KoRule();
+  private final Board board;
+  private GameState state;
+  private Color currentTurn = Color.BLACK;
+  private final KoRule koRule = new KoRule();
 
-    private final List<GameObserver> observers = new ArrayList<>();
+  public int blackPlacedStones = 0;
+  public int whitePlacedStones = 0;
+  public int blackPassStones = 0;
+  public int whitePassStones = 0;
 
-    public Game(Board board) {
-        this.board = board;
-        this.state = new WaitingForPlayers();
-    }
+  public int getBlackPlacedStones() {
+    return blackPlacedStones;
+  }
 
-    public void addPlayer(String playerId) {
-        state.addPlayer(this, playerId);
-    }
+  public int getWhitePlacedStones() {
+    return whitePlacedStones;
+  }
 
-    public void makeMove(Move move) {
-        state.makeMove(this, move);
-    }
+  public int getBlackPassStones() {
+    return blackPassStones;
+  }
 
-    /* package-private - for state */
-    void setState(GameState state) {
-        this.state = state;
-    }
+  public int getWhitePassStones() {
+    return whitePassStones;
+  }
 
-    void switchTurn() {
-        currentTurn = currentTurn.opposite();
-    }
+  private final List<GameObserver> observers = new ArrayList<>();
 
-    public Color getCurrentTurn() {
-        return currentTurn;
-    }
+  public Game(Board board) {
+    this.board = board;
+    this.state = new WaitingForPlayers();
+  }
 
-    public Board getBoard() {
-        return board;
-    }
+  public void addPlayer(String playerId) {
+    state.addPlayer(this, playerId);
+  }
 
-    public KoRule getKoRule() {
-        return koRule;
-    }
+  public void makeMove(Move move) {
+    state.makeMove(this, move);
+  }
 
-    /* ===== Observer ===== */
+  /* package-private - for state */
+  void setState(GameState state) {
+    this.state = state;
+  }
 
-    public void addObserver(GameObserver observer) {
-        observers.add(observer);
-    }
+  void switchTurn() {
+    currentTurn = currentTurn.opposite();
+  }
 
-    void notifyObservers(GameEvent event) {
-        observers.forEach(o -> o.onGameEvent(event));
-    }
+  public Color getCurrentTurn() {
+    return currentTurn;
+  }
+
+  public Board getBoard() {
+    return board;
+  }
+
+  public KoRule getKoRule() {
+    return koRule;
+  }
+
+  /* ===== Observer ===== */
+
+  public void addObserver(GameObserver observer) {
+    observers.add(observer);
+  }
+
+  void notifyObservers(GameEvent event) {
+    observers.forEach(o -> o.onGameEvent(event));
+  }
 }
